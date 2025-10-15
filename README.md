@@ -37,6 +37,11 @@ import { html } from "lit-html";
 
 @customElement("password-exposer")
 export PasswordExposer extends LitElement {
+    @property()
+    protected labelText: String = ""
+
+    @property()
+    protected toggleText: String = ""
 
     onTogglePassword(event) {
         let el = this.querySelector("myPwd") as HTMLInputElement
@@ -50,8 +55,8 @@ export PasswordExposer extends LitElement {
     }
 
     render() {
-        return html '<div>Please enter password: <input type="password" name="myPwd" id="myPwd" />'
-            +  '<button type="button" @click="${this.onTogglePassword}">Toggle password</button></div>'
+        return html '<div>${labelText} <input type="password" name="myPwd" id="myPwd" />'
+            + '<button type="button" @click="${this.onTogglePassword}">${toggleText}</button></div>'
             + '<button type="button"">Submit</button>'
     }
 }
@@ -68,7 +73,7 @@ File: password.html
   </head>
   <body>
     Hi, please log in.
-    <password-exposer></password-exposer>
+    <password-exposer labelText="Please enter password:" toggleText="Toggle password"></password-exposer>
   </body>
 </html>
 ```
@@ -76,6 +81,11 @@ File: password.html
 The above code seems fine, but the problem is that if I'm someone who knows how to design pages but not that great with 
 Javascript, I now have to learn more Javascript and program HTML inside Javascript. I also lose direct access to the 
 styling. I also have a hard time changing the 'toggle' to an icon.
+
+Notice to make this component a little generic, the attribute/properties 'labelText' and 'toggleText' are added to the component, but
+the Submit button text was is not. This is an example of the Web Component developer not anticipating everything with the rendering
+that might need changing by the user. There may be other aspect of this component that need to be added later on due to how things
+are rendered.
 
 On the other hand, if I take the enhancing approach, I can put the password field directly into the HTML and I have greater access to
 it. The web component changes from being something the generates HTML to something the discovers its assocaited HTML and enhances it.
@@ -155,7 +165,10 @@ to the Web Component developer and the HTML gets enhanced.
 
 Of course, password-exposer2 is more Typescript than the first example, with the element query and the addEventListener()/removeEventListener()
 lines that LitElement takes care of in the first example with the @click binding. I like to have the events go to the class level and then broker
-them from there which makes it easier to remove the listener later.
+them from there which makes it easier to remove the listener later. On the other hand, there is no need to have labelText or toggleText as
+attribute/properties of the element since the HTML is controlled externally.
+
+With this approach, I find that I spend less time in the Web Component code than I do in the HTML/CSS code.
 
 
 
