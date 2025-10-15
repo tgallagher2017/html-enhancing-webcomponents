@@ -29,7 +29,7 @@ stuff with annotations, and best of all, it does not get in the way of the low l
 Let's say for example I have a password input field and I want to expose the password as plain text when the user clicks a button.
 Here is a way this can be done as a LitElement
 
----
+```
 File: password-exposer.ts
 
 import { customElement } from "lit/decorators.js";
@@ -55,11 +55,11 @@ export PasswordExposer extends LitElement {
             + '<button type="button"">Submit</button>'
     }
 }
----
+```
 
 NOTE: of course, there is a typescript build process to convert this to Javascript for the page to read.
 
----
+```
 File: password.html
 
 <html>
@@ -71,7 +71,7 @@ File: password.html
     <password-exposer></password-exposer>
   </body>
 </html>
----
+```
 
 The above code seems fine, but the problem is that if I'm someone who knows how to design pages but not that great with 
 Javascript, I now have to learn more Javascript and program HTML inside Javascript. I also loss direct access to the 
@@ -80,7 +80,7 @@ styling. I also have a hard time changing the 'toggle' to an icon.
 On the other hand, if I take the enhancing approach, I can put the password field directly into the HTML and I have greater access to
 it. The web component changes from being something the generates HTML to something the discovers its assocaited HTML and enhances it.
 
----
+```
 File: password-exposer2.ts
 
 import { customElement, property } from "lit/decorators.js";
@@ -125,9 +125,9 @@ export class PasswordExposer2 extends ShadowlessComponent {
         }
     }
 }
----
+```
 
----
+```
 File: password2.html
 
 <html>
@@ -144,7 +144,7 @@ File: password2.html
     </password-exposer2>
   </body>
 </html>
----
+```
 
 Now, as an HTML developer, I have complete control over how the password and the rest of the HTML appear. Even if the password-exposer2 does
 not work properly, the password elements will still appear the way I want. If I wanted to change the toggle from a button to an image, then 
