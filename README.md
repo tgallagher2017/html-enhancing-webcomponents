@@ -74,7 +74,7 @@ File: password.html
 ```
 
 The above code seems fine, but the problem is that if I'm someone who knows how to design pages but not that great with 
-Javascript, I now have to learn more Javascript and program HTML inside Javascript. I also loss direct access to the 
+Javascript, I now have to learn more Javascript and program HTML inside Javascript. I also lose direct access to the 
 styling. I also have a hard time changing the 'toggle' to an icon.
 
 On the other hand, if I take the enhancing approach, I can put the password field directly into the HTML and I have greater access to
